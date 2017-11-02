@@ -27,6 +27,7 @@ public class VentanaPrincipal {
 	//Hacemos esto para que podamos cambiar despu√©s los componentes por otros
 	JPanel [][] panelesJuego;
 	JButton [][] botonesJuego;
+	JLabel [][] marcadorJuego;
 	
 	//Correspondencia de colores para las minas:
 	Color correspondenciaColores [] = {Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED};
@@ -139,7 +140,23 @@ public class VentanaPrincipal {
 	 * M√©todo que inicializa todos los l√≠steners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
-		//TODO
+		
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego[i].length; j++) {
+				botonesJuego[i][j].addActionListener(new ActionListener() {
+					
+					int auxI = i;
+					int auxJ = j;
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						juego.abrirCasilla(auxI, auxJ);
+						
+					}
+				});
+			}
+		}
+		
 	}
 	
 	
@@ -156,7 +173,31 @@ public class VentanaPrincipal {
 	 * @param j: posici√≥n horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
+		
+		if (juego.abrirCasilla(i, j) == true) {
+			
+			marcadorJuego[i][j] = new JLabel(String.valueOf(juego.getMinasAlrededor(i, j)));
+			
+			 if (juego.getMinasAlrededor(i, j) == 0) {
+				 marcadorJuego[i][j].setForeground(correspondenciaColores[0]);
+			 }
+			 
+			 if (juego.getMinasAlrededor(i, j) == 1) {
+				 marcadorJuego[i][j].setForeground(correspondenciaColores[1]);
+			 }
+			 
+			 if (juego.getMinasAlrededor(i, j) == 2) {
+				 marcadorJuego[i][j].setForeground(correspondenciaColores[2]);
+			 }
+			 
+			 if (juego.getMinasAlrededor(i, j) == 3) {
+				 marcadorJuego[i][j].setForeground(correspondenciaColores[3]);
+			 }
+			 
+			 refrescarPantalla();
+			
+		}
+		
 	}
 	
 	
@@ -166,14 +207,23 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		
+		if (juego.esFinJuego() == true) {
+			JOptionPane.showMessageDialog(null, "°Felicidades has completado el nivel! °Like a BOSS!", "°Like a BOSS!", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		if (juego.esFinJuego() == false) {
+			JOptionPane.showMessageDialog(null, "°Vaya NOOB est·s hecho! °Ni jugar al buscaminas sabes!", "°Y se formo la explosionera!", JOptionPane.WARNING_MESSAGE);
+		}
+		
+		
 	}
 
 	/**
 	 * M√©todo que muestra la puntuaci√≥n por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		//TODO
+		pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
 	}
 	
 	/**

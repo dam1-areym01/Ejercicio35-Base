@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  */
 public class ActionBoton implements ActionListener{
 
-	
+	VentanaPrincipal ventana = new VentanaPrincipal();
 
 	public ActionBoton() {
 		//TODO
