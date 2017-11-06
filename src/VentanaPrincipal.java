@@ -35,10 +35,10 @@ public class VentanaPrincipal {
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
 	
-	
 	//LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
 	
+	int i, j;
 	
 	//Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
@@ -141,19 +141,9 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		
-		for (int i = 0; i < botonesJuego.length; i++) {
-			for (int j = 0; j < botonesJuego[i].length; j++) {
-				botonesJuego[i][j].addActionListener(new ActionListener() {
-					
-					int auxI = i;
-					int auxJ = j;
-					
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						juego.abrirCasilla(auxI, auxJ);
-						
-					}
-				});
+		for (i = 0; i < botonesJuego.length; i++) {
+			for  (j = 0; j < botonesJuego[i].length; j++) {
+				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
 			}
 		}
 		
@@ -176,24 +166,26 @@ public class VentanaPrincipal {
 		
 		if (juego.abrirCasilla(i, j) == true) {
 			
-			marcadorJuego[i][j] = new JLabel(String.valueOf(juego.getMinasAlrededor(i, j)));
+			JLabel marcadorJuego = new JLabel(String.valueOf(juego.getMinasAlrededor(i, j)));
 			
 			 if (juego.getMinasAlrededor(i, j) == 0) {
-				 marcadorJuego[i][j].setForeground(correspondenciaColores[0]);
+				 marcadorJuego.setForeground(correspondenciaColores[0]);
 			 }
 			 
 			 if (juego.getMinasAlrededor(i, j) == 1) {
-				 marcadorJuego[i][j].setForeground(correspondenciaColores[1]);
+				 marcadorJuego.setForeground(correspondenciaColores[1]);
 			 }
 			 
 			 if (juego.getMinasAlrededor(i, j) == 2) {
-				 marcadorJuego[i][j].setForeground(correspondenciaColores[2]);
+				 marcadorJuego.setForeground(correspondenciaColores[2]);
 			 }
 			 
 			 if (juego.getMinasAlrededor(i, j) == 3) {
-				 marcadorJuego[i][j].setForeground(correspondenciaColores[3]);
+				 marcadorJuego.setForeground(correspondenciaColores[3]);
 			 }
 			 
+			 panelesJuego[i][j].removeAll();
+			 panelesJuego[i][j].add(marcadorJuego);
 			 refrescarPantalla();
 			
 		}
