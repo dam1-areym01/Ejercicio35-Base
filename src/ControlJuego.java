@@ -185,7 +185,7 @@ public class ControlJuego {
 	public boolean abrirCasilla(int i, int j) {
 
 		if (tablero[i][j] != MINA) {
-			puntuacion++;
+			
 			return true;
 		}
 		return false;

@@ -38,9 +38,11 @@ public class ActionBoton implements ActionListener {
 			juego.getPuntuacion();
 			if(juego.esFinJuego()) {
 				ventana.mostrarFinJuego(true);
+				ventana.refrescarPantalla();
 			}
 		} else {
 			ventana.mostrarFinJuego(false);
+			ventana.refrescarPantalla();
 		}
 		
 		ventana.refrescarPantalla();

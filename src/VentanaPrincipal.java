@@ -215,6 +215,7 @@ public class VentanaPrincipal {
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
+		
 		pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
 	}
 	
